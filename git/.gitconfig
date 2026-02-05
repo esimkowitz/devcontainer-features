@@ -1,0 +1,13 @@
+[alias]
+    st = status
+    co = checkout
+    br = branch
+
+[core]
+    autocrlf = input
+
+[pull]
+    rebase = true
+
+[init]
+    defaultBranch = main
