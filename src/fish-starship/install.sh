@@ -3,7 +3,15 @@ set -e
 
 echo "Installing Fish shell and Starship prompt..."
 
-# Install Fish shell from default repos (Fish 3.x available in Ubuntu 22.04+)
+# Install Fish shell via PPA (added manually to avoid apt-add-repository Launchpad API issues)
+# Adapted from https://github.com/meaningful-ooo/devcontainer-features/blob/main/src/fish/install.sh
+apt-get update
+apt-get install -y --no-install-recommends curl ca-certificates
+. /etc/os-release
+echo "deb https://ppa.launchpadcontent.net/fish-shell/release-4/ubuntu ${UBUNTU_CODENAME} main" \
+    > /etc/apt/sources.list.d/fish-shell-release-4.list
+curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x88421e703edc7af54967ded473c9fcc9e2bb48da" \
+    > /etc/apt/trusted.gpg.d/fish-shell-release-4.asc
 apt-get update
 apt-get install -y --no-install-recommends fish
 apt-get clean -y
