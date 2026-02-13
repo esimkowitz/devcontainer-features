@@ -26,4 +26,10 @@ sed "s|{{FISH_GREETING}}|${GREETING}|g" "$(dirname "$0")/config.fish" > "$FISH_C
 # Set ownership
 chown -R "${_REMOTE_USER}:${_REMOTE_USER}" "${_REMOTE_USER_HOME}/.config"
 
+# Install onCreate script for persistent fish data
+FEATURE_DIR="/usr/local/share/fish-starship"
+mkdir -p "$FEATURE_DIR"
+cp "$(dirname "$0")/onCreate.sh" "$FEATURE_DIR/onCreate.sh"
+chmod +x "$FEATURE_DIR/onCreate.sh"
+
 echo "Fish shell and Starship prompt installed successfully!"
