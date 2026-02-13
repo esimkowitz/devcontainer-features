@@ -3,10 +3,7 @@ set -e
 
 echo "Installing Fish shell and Starship prompt..."
 
-# Install Fish shell
-apt-get update
-apt-get install -y --no-install-recommends software-properties-common
-apt-add-repository -y ppa:fish-shell/release-3
+# Install Fish shell from default repos (Fish 3.x available in Ubuntu 22.04+)
 apt-get update
 apt-get install -y --no-install-recommends fish
 apt-get clean -y
