@@ -11,7 +11,11 @@
         }
     },
     "mounts": [
-        "source=fish-persistent-data-${devcontainerId},target=/mnt/fish-persistent-data,type=volume"
+        {
+            "source": "fish-persistent-data-${devcontainerId}",
+            "target": "/mnt/fish-persistent-data",
+            "type": "volume"
+        }
     ],
     "onCreateCommand": "/usr/local/share/fish-starship/onCreate.sh",
     "installsAfter": [
