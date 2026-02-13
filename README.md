@@ -39,15 +39,4 @@ Add features to your `devcontainer.json`:
 
 ### SSH Agent Forwarding
 
-For SSH signing to work, mount your host's SSH agent socket into the container. Add to VS Code User Settings (`Ctrl+Shift+P` > "Preferences: Open User Settings (JSON)"):
-
-```json
-{
-    "dev.containers.defaultMounts": [
-        "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
-    ],
-    "dev.containers.containerEnv": {
-        "SSH_AUTH_SOCK": "/ssh-agent"
-    }
-}
-```
+VS Code [automatically forwards your SSH agent](https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials) into dev containers. The ssh-signing feature detects this at shell login and configures git commit signing automatically — no additional configuration needed.
