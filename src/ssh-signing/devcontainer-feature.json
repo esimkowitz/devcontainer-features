@@ -1,0 +1,26 @@
+{
+    "id": "ssh-signing",
+    "version": "1.0.0",
+    "name": "SSH Commit Signing",
+    "description": "Configures git to use SSH commit signing when an agent is available. Detects keys at container start.",
+    "options": {
+        "gitUserName": {
+            "type": "string",
+            "default": "",
+            "description": "Default git user.name (leave empty to skip)"
+        },
+        "gitUserEmail": {
+            "type": "string",
+            "default": "",
+            "description": "Default git user.email (leave empty to skip)"
+        },
+        "gitAliases": {
+            "type": "boolean",
+            "default": true,
+            "description": "Apply common git aliases and settings (st, co, br, pull.rebase, etc.)"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

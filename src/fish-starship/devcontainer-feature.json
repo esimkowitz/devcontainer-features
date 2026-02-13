@@ -1,0 +1,23 @@
+{
+    "id": "fish-starship",
+    "version": "1.0.0",
+    "name": "Fish Shell with Starship Prompt",
+    "description": "Installs Fish shell and Starship prompt with a clean devcontainer configuration.",
+    "options": {
+        "fishGreeting": {
+            "type": "string",
+            "default": "Glub glub! \ud83d\udc1f \ud83d\udc20",
+            "description": "Custom Fish shell greeting message"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "fish"
+            }
+        }
+    }
+}

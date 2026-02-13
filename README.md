@@ -1,28 +1,53 @@
-# My Dotfiles
+# Devcontainer Features
 
-Personal configuration for devcontainers.
+Personal [dev container features](https://containers.dev/implementors/features/) for configuring development environments.
 
-## Setup
+## Features
 
-1. Add to VS Code User Settings (`Ctrl+Shift+P` → "Preferences: Open User Settings (JSON)"):
+### fish-starship
 
-   ```json
-   {
-     "dotfiles.repository": "esimkowitz/dotfiles",
-     "dotfiles.installCommand": "install.sh",
-     "dev.containers.defaultMounts": [
-       "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
-     ],
-     "dev.containers.containerEnv": {
-       "SSH_AUTH_SOCK": "/ssh-agent"
-     }
-   }
-   ```
+Installs [Fish shell](https://fishshell.com/) and [Starship](https://starship.rs/) prompt.
 
-2. Rebuild any devcontainer
+| Option | Type | Default |
+|--------|------|---------|
+| `fishGreeting` | string | `Glub glub! 🐟 🐠` |
 
-## What it does
+### ssh-signing
 
-- Detects if SSH agent is available (mounted from WSL/Linux host)
-- Configures git to use SSH signing when agent is present
-- Skips signing setup gracefully on Windows hosts without agent forwarding
+Configures git to use SSH commit signing when an agent is available. Detects keys automatically at container start.
+
+| Option | Type | Default |
+|--------|------|---------|
+| `gitUserName` | string | `""` |
+| `gitUserEmail` | string | `""` |
+| `gitAliases` | boolean | `true` |
+
+Includes git aliases (`st`, `co`, `br`), `pull.rebase=true`, `autocrlf=input`, and `init.defaultBranch=main`.
+
+## Usage
+
+Add features to your `devcontainer.json`:
+
+```json
+{
+    "features": {
+        "ghcr.io/esimkowitz/dotfiles/fish-starship:1": {},
+        "ghcr.io/esimkowitz/dotfiles/ssh-signing:1": {}
+    }
+}
+```
+
+### SSH Agent Forwarding
+
+For SSH signing to work, mount your host's SSH agent socket into the container. Add to VS Code User Settings (`Ctrl+Shift+P` > "Preferences: Open User Settings (JSON)"):
+
+```json
+{
+    "dev.containers.defaultMounts": [
+        "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
+    ],
+    "dev.containers.containerEnv": {
+        "SSH_AUTH_SOCK": "/ssh-agent"
+    }
+}
+```
