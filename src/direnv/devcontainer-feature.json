@@ -1,0 +1,18 @@
+{
+    "id": "direnv",
+    "version": "1.0.0",
+    "name": "direnv with dotenv support",
+    "description": "Installs direnv and configures shell hooks for bash, zsh, and fish. Enables load_dotenv by default so .env files are automatically loaded.",
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "latest",
+            "description": "Version of direnv to install ('latest', 'system', or a specific version like '2.34.0')",
+            "proposals": ["latest", "system"]
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/esimkowitz/dotfiles/fish-starship"
+    ]
+}
