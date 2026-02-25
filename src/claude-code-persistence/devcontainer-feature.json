@@ -1,0 +1,42 @@
+{
+    "id": "claude-code-persistence",
+    "version": "1.0.0",
+    "name": "Claude Code Persistence",
+    "description": "Persists Claude Code configuration (~/.claude/ and ~/.claude.json) across container rebuilds using Docker named volumes.",
+    "options": {
+        "persistClaudeDir": {
+            "type": "boolean",
+            "default": true,
+            "description": "Persist ~/.claude/ directory (history, projects, settings)"
+        },
+        "persistClaudeJson": {
+            "type": "boolean",
+            "default": false,
+            "description": "Persist ~/.claude.json file (auth/config)"
+        },
+        "sharedAcrossContainers": {
+            "type": "boolean",
+            "default": false,
+            "description": "When true, uses shared volume names across all devcontainers. When false, volumes are scoped per-container."
+        }
+    },
+    "mounts": [
+        {
+            "source": "claude-dir-${devcontainerId}",
+            "target": "/mnt/claude-dir",
+            "type": "volume"
+        },
+        {
+            "source": "claude-json-${devcontainerId}",
+            "target": "/mnt/claude-json",
+            "type": "volume"
+        }
+    ],
+    "onCreateCommand": "/usr/local/share/claude-code-persistence/onCreate.sh",
+    "installsAfter": [
+        "ghcr.io/stu-bell/devcontainer-features/claude-code",
+        "ghcr.io/anthropics/devcontainer-features/claude-code",
+        "ghcr.io/devcontainers-extra/features/claude-code",
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
