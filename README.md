@@ -34,6 +34,18 @@ Installs [direnv](https://direnv.net/) and configures shell hooks for bash, zsh,
 
 The `version` option accepts `"latest"`, `"system"`, or a specific version like `"2.34.0"`.
 
+### claude-code-persistence
+
+Persists [Claude Code](https://claude.ai/code) configuration across container rebuilds using Docker named volumes.
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `persistClaudeDir` | boolean | `true` | Persist `~/.claude/` directory (history, projects, settings) |
+| `persistClaudeJson` | boolean | `false` | Persist `~/.claude.json` file (auth/config) |
+| `sharedAcrossContainers` | boolean | `false` | Reserved for future use |
+
+Use alongside a Claude Code installation feature (e.g., `ghcr.io/anthropics/devcontainer-features/claude-code`).
+
 ## Usage
 
 Add features to your `devcontainer.json`:
@@ -43,7 +55,8 @@ Add features to your `devcontainer.json`:
     "features": {
         "ghcr.io/esimkowitz/devcontainer-features/fish-starship:1": {},
         "ghcr.io/esimkowitz/devcontainer-features/ssh-signing:1": {},
-        "ghcr.io/esimkowitz/devcontainer-features/direnv:1": {}
+        "ghcr.io/esimkowitz/devcontainer-features/direnv:1": {},
+        "ghcr.io/esimkowitz/devcontainer-features/claude-code-persistence:1": {}
     }
 }
 ```
