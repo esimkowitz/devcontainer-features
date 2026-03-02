@@ -41,6 +41,12 @@ if [ "$PERSIST_CLAUDE_DIR" = "true" ]; then
                 rm -rf "$CLAUDE_DIR.old"
             fi
             mv "$CLAUDE_DIR" "$CLAUDE_DIR.old"
+
+            # If volume is empty, copy the backup contents to volume
+            if [ -z "$(ls -A "$MOUNT_CLAUDE_DIR")" ]; then
+                echo "Migrating existing ~/.claude/ data to volume..."
+                cp -r "$CLAUDE_DIR.old/." "$MOUNT_CLAUDE_DIR/"
+            fi
         fi
 
         # Remove existing symlink if present
